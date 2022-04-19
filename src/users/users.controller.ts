@@ -7,8 +7,6 @@ import { TYPES } from '../types';
 import 'reflect-metadata';
 import { IUserController } from './users.controller.interface';
 
-class User {}
-const users = [];
 @injectable()
 export class UsersController extends BaseController implements IUserController {
   constructor(@inject(TYPES.ILogger) private loggerService: ILogger) {
@@ -34,7 +32,6 @@ export class UsersController extends BaseController implements IUserController {
 
   register(req: Request, res: Response, next: NextFunction) {
     console.log('ds');
-    users.push(new User());
     next(new HTTPError(401, 'User unauthorized', 'register'));
     // this.ok(res, 'Register')
   }
