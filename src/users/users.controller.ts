@@ -31,6 +31,7 @@ export class UsersController extends BaseController implements IUserController {
   }
 
   register(req: Request, res: Response, next: NextFunction) {
+    console.log('ds');
     next(new HTTPError(401, 'User unauthorized', 'register'));
     // this.ok(res, 'Register')
   }
