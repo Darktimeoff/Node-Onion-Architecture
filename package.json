@@ -7,7 +7,7 @@
   "scripts": {
     "build": "tsc",
     "lint:fix": "eslint ./src/** --cache --fix",
-    "start": "tsc && nodemon ./dist/main.js",
+    "dev": "nodemon",
     "prepare": "husky install"
   },
   "author": "",
@@ -24,6 +24,7 @@
     "lint-staged": "^12.3.8",
     "nodemon": "^2.0.15",
     "prettier": "^2.6.2",
+    "ts-node": "^10.7.0",
     "typescript": "^4.6.3"
   },
   "dependencies": {
