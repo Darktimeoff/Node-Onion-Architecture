@@ -6,6 +6,7 @@
   "type": "commonjs",
   "scripts": {
     "build": "tsc",
+    "lint:fix": "eslint ./src/** --cache --fix",
     "start": "tsc && nodemon ./dist/main.js",
     "prepare": "husky install"
   },
@@ -32,6 +33,6 @@
     "tslog": "^3.3.3"
   },
   "lint-staged": {
-    "*.{ts,js}": "eslint --cache --fix"
+    "*.{ts,js}": "npm run lint:fix"
   }
 }
