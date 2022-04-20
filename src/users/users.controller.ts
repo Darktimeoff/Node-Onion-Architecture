@@ -6,6 +6,7 @@ import { ILogger } from '../logger/logger.interface';
 import { TYPES } from '../types';
 import 'reflect-metadata';
 import { IUserController } from './users.controller.interface';
+import { UserLoginDTO, UserRegitserDTO } from './dto';
 
 @injectable()
 export class UsersController extends BaseController implements IUserController {
@@ -26,12 +27,13 @@ export class UsersController extends BaseController implements IUserController {
     ]);
   }
 
-  login(req: Request, res: Response) {
+  login(req: Request<{}, {}, UserLoginDTO>, res: Response) {
+    console.log(req.body);
     this.ok(res, 'Loggin');
   }
 
-  register(req: Request, res: Response, next: NextFunction) {
-    console.log('ds');
+  register(req: Request<{}, {}, UserRegitserDTO>, res: Response, next: NextFunction) {
+    console.log(req.body);
     next(new HTTPError(401, 'User unauthorized', 'register'));
     // this.ok(res, 'Register')
   }
