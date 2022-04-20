@@ -32,7 +32,12 @@ export abstract class BaseController implements IBaseController {
   protected bindRoutes(routes: IControllerRoute[]) {
     routes.forEach((r) => {
       this.logger.log(`[${r.method}]:${r.path}`);
-      this.router[r.method](r.path, r.handler.bind(this));
+
+      const handler = r.handler.bind(this);
+      const middlewares = r.middlewares?.map((m) => m.execute.bind(m));
+      const pipeline = middlewares ? [...middlewares, handler] : handler;
+
+      this.router[r.method](r.path, pipeline);
     });
   }
 }

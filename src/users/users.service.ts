@@ -11,7 +11,7 @@ export class UserService implements IUserService {
     // проверка что он есть
     // если есть возращаем нулл
     // если нет - создаем
-    return Math.random() > 0.5 ? null : newUser;
+    return newUser;
   }
 
   validateUser(dto: UserLoginDTO): boolean {

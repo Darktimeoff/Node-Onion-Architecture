@@ -7,8 +7,8 @@ import { TYPES } from '../types';
 import 'reflect-metadata';
 import { IUserController } from './users.controller.interface';
 import { UserLoginDTO, UserRegitserDTO } from './dto';
-import { User } from './user.entity';
 import { IUserService } from './user.service.interface';
+import { ValidateMiddleware } from '../common/validate.middleware';
 
 @injectable()
 export class UsersController extends BaseController implements IUserController {
@@ -28,6 +28,7 @@ export class UsersController extends BaseController implements IUserController {
         path: '/register',
         method: 'post',
         handler: this.register,
+        middlewares: [new ValidateMiddleware(UserRegitserDTO)],
       },
     ]);
   }
@@ -45,8 +46,11 @@ export class UsersController extends BaseController implements IUserController {
     }
 
     this.ok(res, {
-      email: result.email,
-      name: result.name,
+      success: true,
+      data: {
+        email: result.email,
+        name: result.name,
+      },
     });
   }
 }
