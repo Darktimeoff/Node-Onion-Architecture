@@ -13,7 +13,8 @@
     "prepare": "husky install",
     "migrate": "prisma migrate dev",
     "studio": "prisma studio",
-    "generate": "prisma generate"
+    "generate": "prisma generate",
+    "run:migrate": "npm run migrate && npm run generate"
   },
   "author": "",
   "license": "ISC",
