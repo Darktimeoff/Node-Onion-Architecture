@@ -10,7 +10,8 @@
     "performance-inspect": "tsc && clinic doctor --on-port 'autocannon -m POST localhost:8000/users/register/' -- node dist/main.js",
     "dev:inspect": "nodemon -e ts,json --exec node --inspect=localhost:9222 -r ts-node/register src/main.ts",
     "dev": "nodemon",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "migrate": "prisma migrate dev"
   },
   "author": "",
   "license": "ISC",
@@ -27,10 +28,12 @@
     "lint-staged": "^12.3.8",
     "nodemon": "^2.0.15",
     "prettier": "^2.6.2",
+    "prisma": "^3.12.0",
     "ts-node": "^10.7.0",
     "typescript": "^4.6.3"
   },
   "dependencies": {
+    "@prisma/client": "^3.12.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.0",
     "class-transformer": "^0.5.1",

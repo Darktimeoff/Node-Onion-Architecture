@@ -3,3 +3,5 @@ node_modules
 .eslintcache
 .clinic
 .env
+/prisma/dev.db
+/prisma/dev.db-journal
