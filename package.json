@@ -11,7 +11,9 @@
     "dev:inspect": "nodemon -e ts,json --exec node --inspect=localhost:9222 -r ts-node/register src/main.ts",
     "dev": "nodemon",
     "prepare": "husky install",
-    "migrate": "prisma migrate dev"
+    "migrate": "prisma migrate dev",
+    "studio": "prisma studio",
+    "generate": "prisma generate"
   },
   "author": "",
   "license": "ISC",
