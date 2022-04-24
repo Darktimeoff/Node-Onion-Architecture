@@ -48,6 +48,7 @@ export class UsersController extends BaseController implements IUserController {
     this.ok(res, {
       success: true,
       data: {
+        id: result.id,
         email: result.email,
         name: result.name,
       },
