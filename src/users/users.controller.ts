@@ -12,6 +12,7 @@ import { ValidateMiddleware } from '../middleware/validate.middleware';
 import { sign } from 'jsonwebtoken';
 import { IConfigService } from '../config/config.service.interface';
 import { IJWTService } from '../auth/jwt.service.interface';
+import { GuardMiddleware } from '../middleware/guard.middleware';
 
 @injectable()
 export class UsersController extends BaseController implements IUserController {
@@ -40,6 +41,7 @@ export class UsersController extends BaseController implements IUserController {
         path: '/info',
         method: 'get',
         handler: this.info,
+        middlewares: [new GuardMiddleware()],
       },
     ]);
   }
@@ -84,8 +86,6 @@ export class UsersController extends BaseController implements IUserController {
   }
 
   async info({ user }: Request<{}, {}, UserRegitserDTO>, res: Response, next: NextFunction) {
-    if (!user) return next(new HTTPError(401, 'UnAuthorized'));
-
     const existedUser = await this.userService.getUser(user);
 
     if (!existedUser) return next(new HTTPError(422, 'User doen`t exist'));
