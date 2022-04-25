@@ -7,4 +7,5 @@ export const TYPES = {
   ConfigService: Symbol.for('ConfigService'),
   PrismaService: Symbol.for('PrismaService'),
   UserRepository: Symbol.for('UserRepository'),
+  JWTService: Symbol.for('JWTService'),
 };

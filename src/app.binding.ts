@@ -1,5 +1,7 @@
 import { ContainerModule, interfaces } from 'inversify';
 import { App } from './app';
+import { JWTService } from './auth/jwt.service';
+import { IJWTService } from './auth/jwt.service.interface';
 import { ConfigService } from './config/config.service';
 import { IConfigService } from './config/config.service.interface';
 import { PrismaService } from './database/prisma.service';
@@ -24,5 +26,6 @@ export const appBindings = new ContainerModule((bind: interfaces.Bind) => {
   bind<IConfigService>(TYPES.ConfigService).to(ConfigService).inSingletonScope();
   bind<IPrismaService>(TYPES.PrismaService).to(PrismaService).inSingletonScope();
   bind<IUserRepository>(TYPES.UserRepository).to(UserRepository).inSingletonScope();
+  bind<IJWTService>(TYPES.JWTService).to(JWTService).inSingletonScope();
   bind<App>(TYPES.Application).to(App).inSingletonScope();
 });
