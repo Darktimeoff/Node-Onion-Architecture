@@ -9,6 +9,7 @@ import { IUserController } from './users/users.controller.interface';
 import { json } from 'body-parser';
 import { IConfigService } from './config/config.service.interface';
 import { IPrismaService } from './database/prisma.service.interface';
+import { AuthMiddleware } from './middleware/auth.middleware';
 
 @injectable()
 export class App {
@@ -47,6 +48,16 @@ export class App {
 
   useMiddleware(): void {
     this.app.use(json());
+
+    const secret = this.configService.get<string>('SECRET');
+
+    if (!secret) {
+      throw new Error('Secret env is undefined');
+    }
+
+    const authMiddleware = new AuthMiddleware(secret);
+
+    this.app.use(authMiddleware.execute.bind(authMiddleware));
   }
 
   useExceptionFilter(): void {

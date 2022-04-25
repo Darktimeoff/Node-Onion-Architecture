@@ -8,7 +8,7 @@ import 'reflect-metadata';
 import { IUserController } from './users.controller.interface';
 import { UserLoginDTO, UserRegitserDTO } from './dto';
 import { IUserService } from './user.service.interface';
-import { ValidateMiddleware } from '../common/validate.middleware';
+import { ValidateMiddleware } from '../middleware/validate.middleware';
 import { sign } from 'jsonwebtoken';
 import { IConfigService } from '../config/config.service.interface';
 
@@ -33,6 +33,11 @@ export class UsersController extends BaseController implements IUserController {
         method: 'post',
         handler: this.register,
         middlewares: [new ValidateMiddleware(UserRegitserDTO)],
+      },
+      {
+        path: '/info',
+        method: 'get',
+        handler: this.info,
       },
     ]);
   }
@@ -72,6 +77,23 @@ export class UsersController extends BaseController implements IUserController {
         id: result.id,
         email: result.email,
         name: result.name,
+      },
+    });
+  }
+
+  async info({ user }: Request<{}, {}, UserRegitserDTO>, res: Response, next: NextFunction) {
+    if (!user) return next(new HTTPError(401, 'UnAuthorized'));
+
+    const existedUser = await this.userService.getUser(user);
+
+    if (!existedUser) return next(new HTTPError(422, 'User doen`t exist'));
+
+    this.ok(res, {
+      success: true,
+      data: {
+        id: existedUser.id,
+        email: existedUser.email,
+        name: existedUser.name,
       },
     });
   }
