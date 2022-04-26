@@ -3,12 +3,12 @@ import { App } from './app';
 import { appBindings } from './app.binding';
 import { TYPES } from './types';
 
-function bootstrap() {
+async function bootstrap() {
   const appContainer = new Container();
   appContainer.load(appBindings);
 
   const app = appContainer.get<App>(TYPES.Application);
-  app.init();
+  await app.init();
 
   return {
     appContainer,
@@ -16,4 +16,4 @@ function bootstrap() {
   };
 }
 
-export const { app, appContainer } = bootstrap();
+export const boot = bootstrap();

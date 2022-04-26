@@ -15,7 +15,7 @@ import { AuthMiddleware } from './middleware/auth.middleware';
 export class App {
   private port = 8000;
   private host = '127.0.0.1';
-  private app: Express;
+  public app: Express;
   private server: Server;
 
   constructor(
@@ -62,5 +62,9 @@ export class App {
 
   useExceptionFilter(): void {
     this.app.use(this.exceptionFilter.catch.bind(this.exceptionFilter));
+  }
+
+  public close() {
+    this.server.close();
   }
 }
