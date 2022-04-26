@@ -16,7 +16,7 @@
     "generate": "prisma generate",
     "run:migrate": "npm run migrate && npm run generate",
     "test": "jest",
-    "test:e2e": "jest --config jest.e2e.config.ts"
+    "test:e2e": "jest --config jest.e2e.config.ts --coverage"
   },
   "author": "",
   "license": "ISC",

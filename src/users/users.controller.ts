@@ -85,7 +85,7 @@ export class UsersController extends BaseController implements IUserController {
     });
   }
 
-  async info({ user }: Request<{}, {}, UserRegitserDTO>, res: Response, next: NextFunction) {
+  async info({ user }: Request, res: Response, next: NextFunction) {
     const existedUser = await this.userService.getUser(user);
 
     if (!existedUser) return next(new HTTPError(422, 'User doen`t exist'));
